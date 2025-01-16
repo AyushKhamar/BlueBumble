@@ -22,6 +22,16 @@ app.use("/api/users", userRouter);
 app.use("/api/matches", matchRouter);
 app.use("/api/messages", messageRouter);
 
+app.use((req, res, error, next) => {
+  res.status(error.status || 500);
+
+  res.json({
+    message: error.message || "Something went wrong!",
+    status: error.status,
+    stack: error.stack,
+  });
+});
+
 app.listen(process.env.PORT | 3000, async () => {
   console.log("Server running at port ", process.env.PORT);
   await connectToMongoDb();

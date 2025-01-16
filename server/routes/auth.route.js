@@ -4,9 +4,9 @@ import { protectRoute } from "../middleware/auth.js";
 
 const router = new express.Router();
 
-router.get("/signup", signUp);
-router.get("/login", login);
-router.get("/logout", logout);
+router.post("/signup", signUp);
+router.post("/login", login);
+router.post("/logout", logout);
 router.get("/me", protectRoute, (req, res) => {
   return res.status(200).json({ success: true, content: req.user });
 });
